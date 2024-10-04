@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+
+int main() {
+    pid_t pid1, pid2, pid3;
+
+    // Crear el primer proceso hijo
+    pid1 = fork();
+
+    if (pid1 == 0) {
+        printf("Proceso hijo 1 (PID: %d) contando hasta 1000\n", getpid());
+        for (int i = 1; i <= 1000; i++) {
+            if (i % 100 == 0) printf("Proceso hijo 1: %d\n", i);
+        }
+        sleep(10); // Espera 10 segundos antes de terminar
+        return 0;
+    } else {
+        pid2 = fork();
+
+        if (pid2 == 0) {
+            printf("Proceso hijo 2 (PID: %d) contando hasta 1000\n", getpid());
+            for (int i = 1; i <= 1000; i++) {
+                if (i % 100 == 0) printf("Proceso hijo 2: %d\n", i);
+            }
+            sleep(10); // Espera 10 segundos antes de terminar
+            return 0;
+        } else {
+            pid3 = fork();
+
+            if (pid3 == 0) {
+                printf("Proceso hijo 3 (PID: %d) contando hasta 1000\n", getpid());
+                for (int i = 1; i <= 1000; i++) {
+                    if (i % 100 == 0) printf("Proceso hijo 3: %d\n", i);
+                }
+                sleep(10); // Espera 10 segundos antes de terminar
+                return 0;
+            } else {
+                printf("Proceso padre (PID: %d) ha creado 3 hijos\n", getpid());
+                sleep(10); // Espera un momento para ver los procesos
+            }
+        }
+    }
+    return 0;
+}
