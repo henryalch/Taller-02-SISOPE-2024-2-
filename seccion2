@@ -43,3 +43,12 @@ int main() {
     }
     return 0;
 }
+//En este codigo demuestro que padre puede crear hijos que ejecutan tareas simultaneas 
+//para ejecutarlo usamos el comando
+//gcc -o multiprocesos multiprocesos
+//luego si no nos da error significa el programa esta bien,ahora lo ejecutamos con el comando
+//./multiprocesos
+//y mientras lo ejecutamos ponemos el comando :pstree
+//para poder ver el arbol de procesos
+//la tarea que el asignamos a los hijos es muy sencilla por lo que le coloque unis sleep() para que me de tiempo para
+//poder ver el arbol del sistema y los ps para poder mostrarme los procesos en ejecucion
