@@ -1,0 +1,46 @@
+1.
+nkdir -p liam
+
+
+mkdir -p /home/usuario/liam
+mkdir liam/documentos
+mkdir liam/documentos/tareas
+mkdir liam/documentos/fijas
+mkdir liam/documentos/repasos
+mkdir liam/proyectos
+mkdir liam/proyectos/examen parcial
+mkdir liam/proyectos/final
+
+2.
+
+chmod 755 liam
+chmod 775 liam/documentos
+chmod 775 liam/proyectos
+chmod 700 liam/documentos/tareas
+chmod 700 liam/proyectos/examen parcial
+chmod 640 liam/proyectos/exmamen final
+
+find ~ -type f -mtime -5
+
+3.CÓDIGO//
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Introduce el valor de n: ";
+    cin >> n;
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j < i; j++) {
+            cout << 0;
+        }
+        cout << 1 << endl;
+    }
+
+    return 0;
+}
+
+g++
+
