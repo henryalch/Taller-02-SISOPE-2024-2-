@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <sys/sysinfo.h>
+#include <time.h>
+
+// Función que simula la carga del procesador
+void* simular_carga(void* arg) {
+    time_t start = time(NULL);
+    // Bucle que dura al menos 120 segundos
+    while (difftime(time(NULL), start) < 120) {
+        // Simulación de carga: operaciones vacías para consumir CPU
+        for (int i = 0; i < 1000000; i++);
+    }
+    return NULL;
+}
+
+int main() {
+    // Obtener el número de núcleos disponibles en el sistema
+    int num_nucleos = get_nprocs();
+    printf("Número de núcleos disponibles: %d\n", num_nucleos);
+
+    // Crear un array para los identificadores de los hilos
+    pthread_t hilos[num_nucleos];
+
+    // Crear los hilos
+    for (int i = 0; i < num_nucleos; i++) {
+        if (pthread_create(&hilos[i], NULL, simular_carga, NULL) != 0) {
+            perror("Error al crear el hilo");
+            exit(1);
+        }
+    }
+
+    // Esperar a que todos los hilos terminen
+    for (int i = 0; i < num_nucleos; i++) {
+        pthread_join(hilos[i], NULL);
+    }
+
+    printf("Todos los hilos han terminado.\n");
+    return 0;
+}
